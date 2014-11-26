@@ -2,10 +2,10 @@ redis = require 'redis'
 client = redis.createClient()
 
 # 扔一个瓶子
-export.throw = (bottle, callback) ->
+exports.throw = (bottle, callback) ->
 	bottle.time = bottle.time || Date.now()
 	# 生成一个id,这里我用的是时间戳
-	bottleId = Date.now().toString(16)
+	bottleId = Math.random().toString(16)
 	type = 
 		male: 0
 		female: 1
@@ -28,7 +28,13 @@ export.throw = (bottle, callback) ->
 
 
 # 捡一个瓶子
-export.pick = (query, callback) ->
+exports.pick = (query, callback) ->
+	# 海星的几率
+	return callback {
+		code: 0,
+		msg: '海星'
+	} if Math.random() <= 0.2
+
 	type = 
 		all: Math.round(Math.random())
 		male: 0
@@ -40,7 +46,7 @@ export.pick = (query, callback) ->
 		client.RANDOMKEY (err, bottleId) ->
 			return callback {
 				code: 0
-				msg: '大海空空如也...'
+				msg: '海星'
 			} unless bottleId
 
 			# 根据id取到相关信息

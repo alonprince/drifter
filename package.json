@@ -2,6 +2,7 @@
   "name": "drifter",
   "version": "0.0.1",
   "dependencies": {
+    "coffee-script": "^1.8.0",
     "express": "^3.18.4",
     "redis": "^0.12.1"
   },
