@@ -5,7 +5,7 @@ for i in [1...6]
 		request.post {
 			url: 'http://127.0.0.1:3000',
 			json: 
-				owner: "bottle #{i}"
+				owner: "bottle1"
 				type: 'male'
 				content: "content #{i}"
 		}, (err, response, body) ->
@@ -16,7 +16,7 @@ for i in [6...11]
 		request.post {
 			url: 'http://127.0.0.1:3000',
 			json: 
-				owner: "bottle #{i}"
+				owner: "bottle#{i}"
 				type: 'female'
 				content: "content #{i}"
 		}, (err, response, body) ->
