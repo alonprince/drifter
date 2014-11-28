@@ -55,8 +55,24 @@ app.get '/user/:user', (req, res) ->
 		res.json result
 
 # 获取特定id的漂流瓶
+# 查不出来具体的瓶子，暂找不到原因
 app.get '/bottle/:id', (req, res) ->
 	mongodb.getOne req.params._id, (result) ->
+		res.json result
+
+# 回复特定的瓶子
+# user=xxx&content=xxx[&time=xxx]
+app.post '/reply/:_id', (req, res) ->
+	return res.json {
+		code: 0
+		msg: '回复信息不完整'
+	} unless req.body.user && req.body.content
+	mongodb.reply req.params._id, req.body, (result) ->
+		res.json result
+
+# 删除特定的瓶子
+app.get '/delete/:_id', (req, res) ->
+	mongodb.delete req.params._id, (result) ->
 		res.json result
 
 app.listen 3000
